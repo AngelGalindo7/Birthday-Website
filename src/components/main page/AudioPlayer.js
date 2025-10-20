@@ -8,7 +8,7 @@ function importAll(r){
 
 
 //consider adding to public to avoid adding bundle size in deployment
-const songs = importAll(require.context("../assets/audio",false,/\.mp3$/));
+const songs = importAll(require.context("../../assets/audio",false,/\.mp3$/));
 
 export default function AudioPlayer() {
   const audioRef = useRef(null);
@@ -46,10 +46,10 @@ export default function AudioPlayer() {
   const skipPrev = () => setSongIndex((i) => (i - 1 + songs.length) % songs.length);
 
   return (
-    <div style = { { textAlign: "center"}}>
+    <div className="audio-player">
       <h2>Now playing: Song {currentSongIndex + 1}</h2>
       <audio ref={audioRef} controls preload="auto" />
-      <div style= {{ marginTop: "1rem"}}>
+      <div className="audio-buttons">
         <button onClick={skipPrev}>Prev</button>
         <button onClick={pauseAudio}>Pause</button>
         <button onClick={skipNext}>Next</button>
