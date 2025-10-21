@@ -7,7 +7,7 @@ export default function Background({children}) {
         <div
             className="background"
             style={{
-                backgroundImage: "url('/tmpart_bday.PNG')",
+                backgroundImage: `url(${process.env.PUBLIC_URL}/tmpart_bday.PNG)`
             }}
         >
             {children}
