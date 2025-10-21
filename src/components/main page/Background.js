@@ -7,7 +7,7 @@ export default function Background({children}) {
         <div
             className="background"
             style={{
-                backgroundImage: "url('/Untitled_Artwork-1.png')",
+                backgroundImage: "url('/tmpart_bday.PNG')",
             }}
         >
             {children}
