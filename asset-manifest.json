@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d519c4be.css",
+    "main.js": "/static/js/main.ad233c80.js",
+    "static/js/453.e08e766b.chunk.js": "/static/js/453.e08e766b.chunk.js",
+    "static/media/The Marias - Heavy.mp3": "/static/media/The Marias - Heavy.6c9953298b09537c7d8e.mp3",
+    "static/media/Louis Armstrong - What A Wonderful World.mp3": "/static/media/Louis Armstrong - What A Wonderful World.b20102694506447ccd09.mp3",
+    "index.html": "/index.html",
+    "main.d519c4be.css.map": "/static/css/main.d519c4be.css.map",
+    "main.ad233c80.js.map": "/static/js/main.ad233c80.js.map",
+    "453.e08e766b.chunk.js.map": "/static/js/453.e08e766b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d519c4be.css",
+    "static/js/main.ad233c80.js"
+  ]
+}
