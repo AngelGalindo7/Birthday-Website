@@ -4,12 +4,10 @@ import VoiceDetector from "./VoiceDetector";
 export default function Cake () {
     const [candleOn, setCandleOn] = useState(true)
     const [micPermissionAsked, setMicPermissionAsked] = useState(false)
-
-    const handleBlowDetected = (isBlowing) => {
-        if(isBlowing && candleOn) {
-            console.log("Blow detected turning candles off")
-            setCandleOn(false)
-        }
+    const [blowState, setBlowState] = useState(null); // "blowing" | "blown" | "reset"
+    const handleBlowDetected = (state) => {
+        setBlowState(state);
+        if (state === "blown") setCandleOn(false);
     };
 
     const handleEnableMic = () => {
@@ -18,6 +16,7 @@ export default function Cake () {
 
     const toggleCandle = () => {
         setCandleOn(prev => !prev);
+        setBlowState(null)
     };
 
     return (
@@ -46,6 +45,10 @@ export default function Cake () {
         onBlowDetected={handleBlowDetected}
         isListening={candleOn}
         />
+        <div>
+            <p>Current blow state: {blowState || "idle"}</p>
+            <p>Candle is {candleOn ? "ON" : "OFF"}</p>
+          </div>
         </>
       )}
     </div>
