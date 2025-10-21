@@ -1,11 +1,4 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,26 +6,126 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.app {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.App-header {
+  position:relative;
+  z-index:1;
+}
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  background-size: 100% 100%; /* stretches to fit width & height */
+  background-position: center;
+  background-repeat: no-repeat;  z-index: -1;                 /* behind everything else */
+}
+.toggle {
+  position:relative;
+  z-index: 3;
+}
+
+/* From Uiverse.io by mrhyddenn */ 
+.shadow__btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 10px 20px;
+  border: none;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 25px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+}
+
+.shadow__btn {
+  background: rgb(0,140,255);
+  box-shadow: 0 0 25px rgb(0,140,255);
+  
+}
+
+.shadow__btn:hover,
+:focus {
+  color: #ffffff;
+  background: #008cff;
+  border: 1px solid #008cff;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+    0 0 100px #008cff;
+}
+
+.cake-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.cake {
+  width: 60vw;
+  max-width: 500px;
+  height: auto;
+  transition: filter 0.8s;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0); /* transparent */
+  pointer-events: none;
+  transition: background 1s ease;
+  z-index: 0;
+}
+
+.overlay.dark {
+  background: rgba(0, 0, 0, 0.8); /* dark mode overlay */
+}
+
+.audio-player {
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  text-align: center;
+  z-index: 3;
+}
+
+.audio-buttons button {
+  margin: 0 5px;
+  background: rgba(255,255,255,0.8);
+  color: black;
+  border: 1px solid black;
 }
