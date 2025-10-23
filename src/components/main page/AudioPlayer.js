@@ -9,11 +9,17 @@ function importAll(r){
 //consider adding to public to avoid adding bundle size in deployment
 const songs = importAll(require.context("../../assets/audio",false,/\.mp3$/));
 
-export default function AudioPlayer( {onDone, visible} ) {
+export default function AudioPlayer( {onDone, visible, delay = 3000} ) {
   const audioRef = useRef(null);
   const [started, setStarted] = useState(false);
+  const [showButton, setShowButton] = useState(false); 
   const [currentSongIndex,setSongIndex] = useState(0);
 
+
+    useEffect(() => {
+    const timer = setTimeout(() => setShowButton(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
 
   const handlePlay = async () => {
     setStarted(true);
@@ -23,7 +29,7 @@ export default function AudioPlayer( {onDone, visible} ) {
     try {
       await audio.play();
 
-      setTimeout(() => onDone && onDone(), 4000);
+      setTimeout(() => onDone && onDone(), 3000);
     } catch(err) {
       console.warn("Play blocked", err);
     }
@@ -72,17 +78,17 @@ export default function AudioPlayer( {onDone, visible} ) {
       ref={audioRef} 
       controls 
       preload="auto"
-      style={{display: started ? "inline": "none"}} />
-
-      {!started && <button className="shadow__btn fade-in" onClick={handlePlay}>音楽を再生する</button>}
-      
+      // style={{display: started ? "inline": "none"}} />
+      style= {{display : "none"}}/>
+      {!started && showButton && <button className="shadow__btn fade-in" onClick={handlePlay}>音楽を再生する</button>}
+{/*       
       {started && (
         <div className="audio-buttons">
         <button onClick={skipPrev}>Prev</button>
         <button onClick={pauseAudio}>Pause</button>
         <button onClick={skipNext}>Next</button>
       </div>
-      )}
+      )} */}
 
     </div>
   );
