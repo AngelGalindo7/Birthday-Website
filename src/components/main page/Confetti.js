@@ -15,28 +15,52 @@ export default function ConfettiAuto() {
         decay: options.decay,
       });
     };
-
+    
+     const randomOrigin = (baseX, baseY, offset = 0.02) => ({
+      x: baseX + (Math.random() * offset * 2 - offset), // random ± offset
+      y: baseY + (Math.random() * offset * 2 - offset),
+    });
     // Example: multiple bursts with different colors
     const bursts = [
-      { particleCount: 50, spread: 60, origin: { x: 0.1, y: 0.7 }, colors: ["#0000FF"], angle: 40 },
-      { particleCount: 100, spread: 80, origin: { x: 0.9, y: 0.7 }, colors: ["#0866f3ff"], angle: 120, decay: 0.9 },
-      { particleCount: 80, spread: 100, origin: { x: 0.5, y: 0.5 }, colors: ["#FF00FF", "#00FFFF"], angle: 90 },
+      { particleCount: 100, spread: 80, origin: { x: 0, y: 1 }, colors: ["#0866f3", "#00BFFF", "#33a3ffff"], angle: 60, decay: 0.9 },
+      { particleCount: 100, spread: 80, origin: { x: 1, y: 1 }, colors: ["#0866f3", "#00BFFF", "#33a3ffff"], angle: 120, decay: 0.9 },
+      // Fireworks upper-middle
+      { particleCount: 80, spread: 100, origin: { x: 0.5, y: 0.5 }, colors: ["#ff0000ff", "#0077ffff"], angle: 90 },
+      // Fireworks upper-left
+      { particleCount: 80, spread: 100, origin: { x: 0.2, y: 0.25 }, colors: ["#ff8800ff", "#00FFFF"], angle: 90 },
+      // Fireworks upper-right
+      { particleCount: 80, spread: 100, origin: { x: 0.8, y: 0.25 }, colors: ["#ff8800ff", "#0077ffff"], angle: 90 },
     ];
+    function firework(x, y) {
+  confetti({
+    particleCount: 100,
+    startVelocity: 30,
+    spread: 360,
+    origin: { x: x, y: y }, // 0-1, relative to canvas width/height
+    gravity: 0.5,
+    ticks: 100,
+    colors: ["#ff0000", "#ffff00", "#00ff00", "#0000ff", "#ff00ff"]
+  });
+}
 
-    // Loop over bursts
-    bursts.forEach((burst, index) => {
-      setTimeout(() => fireConfetti(burst), index * 500); // Stagger by 500ms
+// Example: launch a firework at center
+firework(0.5, 0.5);
+    requestAnimationFrame(() => {
+      const initialDelay = 700;
+
+      // Fire left and right streams together
+      setTimeout(() => {
+        fireConfetti({ ...bursts[0], origin: randomOrigin(bursts[0].origin.x, bursts[0].origin.y,) });
+        fireConfetti({ ...bursts[1], origin: randomOrigin(bursts[1].origin.x, bursts[1].origin.y) });
+        firework(0.4,0.4);
+      }, initialDelay);
+
+      // Fire fireworks staggered
+      bursts.slice(2).forEach((burst, index) => {
+        setTimeout(() => fireConfetti(burst), initialDelay + (index + 1) * 500);
+      });
     });
-
-    // Optional: repeat automatically every few seconds
-    // const interval = setInterval(() => {
-    //   bursts.forEach((burst, index) => {
-    //     setTimeout(() => fireConfetti(burst), index * 500);
-    //   });
-    // }, 5000);
-    //
-    // return () => clearInterval(interval);
   }, []);
 
-  return null; // No button needed
+  return null; 
 }
