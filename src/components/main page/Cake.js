@@ -1,10 +1,10 @@
 
 
-export default function CakeImage() {
+export default function CakeImage( {fadeOut}) {
     return (
-        <div className="cake-container">
+        <div className={`cake-container ${fadeOut ? "fade-out" : ""}`}>
             <img
-            src={`${process.env.PUBLIC_URL}/caketmp.PNG`}
+            src={`${process.env.PUBLIC_URL}/BdayImage.PNG`}
             alt="Birthday Cake"
             className="cake"
             />
