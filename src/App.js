@@ -1,46 +1,45 @@
 import React, {useState} from "react"
 import './App.css';
 import AudioPlayer from './components/main page/AudioPlayer';
-import ConfettiButton from './components/main page/Confetti'
 import Background from "./components/main page/Background";
-import CakeImage from "./components/main page/Cake";
 import LightsToggle from "./components/LightsToggle";
 import Overlay from "./components/main page/Overlay";
 import Cake from "./components/main page/CakeContainer";
 import ConfettiAuto from "./components/main page/Confetti";
-import VoiceTestLogger from "./components/main page/voicetest";
+import Words from "./components/main page/Words";
+import FireworkShow from "./components/main page/Firework";
+
+
 function App() {
   const [lightsOff, setLightsOff] = useState(false);
   const [stage, setStage] = useState("music");
   return (
-    
       <Background>
-      {
-      <AudioPlayer
+        <AudioPlayer
       visible={ stage === "music"}
       onDone = {() => setStage("candles")}
       />
-      
-      }
+      <ConfettiAuto/>
+     
 
-      {
-        stage === "candles" && (
-          <div className="">
-            <Cake />
-            <CakeImage />
-            <ConfettiAuto/>
-            <button onClick={() => setStage("outro")}>Go to Outro</button>
-          </div>
-        )
-      }
+      {stage === "candles" && (
+        <>
 
-   
-      
-  <LightsToggle lightsOff={lightsOff} setLightsOff={setLightsOff}/>
-      <Overlay isDark={lightsOff} />
-      </Background>
-      
-    );
-}
+          { <FireworkShow
+  initialLaunch={5}
+  colors={{ min: 0, max: 360 }}
+  soundFiles={[
+
+  ]}
+/> }
+    
+          <Cake onNext={() => setStage("outro")} />
+          <ConfettiAuto />
+        </>
+      )}
+
+      {stage === "outro" && <Words />}
+    </Background>)
+};
 
 export default App;
